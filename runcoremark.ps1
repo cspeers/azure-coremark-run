@@ -4,8 +4,7 @@
 param
 (
     [Parameter()]
-    [String]
-    $ACUHOME = $PSScriptRoot,
+    [String]$ACUHOME = $PSScriptRoot,
     [Parameter()]
     [int]$Iterations = 7,
     [Parameter()]
