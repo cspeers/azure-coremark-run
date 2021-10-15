@@ -164,14 +164,16 @@ function ConvertFrom-TestRun {
         else {
             if (-not [string]::IsNullOrEmpty($line)) {
                 if ($line -like "*:*") {
-                    $buffer += $line
+                    if ($line -match '^Parallel *(\S+) *: (\d+)') {
+                        $buffer += "Concurrency:$($Matches[1])"
+                        $buffer += "Threads:$($Matches[2])"
+                    }
+                    else {
+                        $buffer += $line
+                    }
                 }
                 elseif ($line -match '^Correct operation validated. ') {
                     $buffer += "Correct:true"
-                }
-                elseif ($line -match '^Parallel *(\S+) *: (\d+)') {
-                    $buffer += "Concurrency:$($Matches[1])"
-                    $buffer += "Threads:$($Matches[2])"
                 }
             }
         }
