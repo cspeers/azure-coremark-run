@@ -35,7 +35,7 @@
   },
   "variables": {
     "networkInterfaceName": "[concat(variables('vmName'),uniqueString(parameters('virtualMachineName')),'-nic')]",
-    "networkSecurityGroupName": "[concat(parameters('virtualMachineName'),'-nsg')]",
+    "networkSecurityGroupName": "[concat(variables('vmName'),'-nsg')]",
     "networkSecurityGroupRules": [
       {
         "name": "SSH",
@@ -167,6 +167,10 @@
     "vmResourceId": {
       "type": "string",
       "value": "[resourceId('Microsoft.Compute/virtualMachines',variables('vmName'))]"
+    },
+    "vmSize": {
+      "type": "string",
+      "value": "[parameters('virtualMachineSize')]"
     }
   }
 }
