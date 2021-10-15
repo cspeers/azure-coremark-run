@@ -159,6 +159,7 @@ function ConvertFrom-TestRun {
                 'MEMORY_SIZE'        = $memSize ?? 'Unknown';
             }
             $output = New-Object psobject -Property $props
+            Write-Output $output
         }
         else {
             if (-not [string]::IsNullOrEmpty($line)) {
@@ -178,7 +179,6 @@ function ConvertFrom-TestRun {
     if ($null -eq $output) {
         throw "Unable to convert $TestRunOutput"
     }
-    return $output
 }
 
 function Start-Build {
@@ -302,7 +302,6 @@ function Confirm-Paths {
 #endregion
 
 try {
-
     if ($ProcessesToCheck | Test-ProcessRunning) {
         Write-Error "FATAL:  Processes in memory may taint tests.  Exiting."
     }    
